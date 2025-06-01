@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEHA BANK - Dashboard</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #e2e8f0;
+            --card-bg: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-text {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--gray);
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .username {
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+        
+        /* Balance Card */
+        .balance-card {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        /* Transaction Cards */
+        .transaction-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .transaction-section {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .transaction-card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .transaction-card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .withdraw-btn {
+            background-color: var(--danger);
+        }
+        
+        .withdraw-btn:hover {
+            background-color: #b91c1c;
+        }
+        
+        /* Voice Assistant */
+        .voice-section {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .voice-btn {
+            background-color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .voice-btn:hover {
+            background-color: #15803d;
+        }
+        
+        #voice-status {
+            color: var(--dark);
+            font-style: italic;
+        }
+        
+        /* Alerts */
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background-color: #dcfce7;
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        
+        .alert-error {
+            background-color: #fee2e2;
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ url_for('home') }}" class="logo">
+                    <span class="logo-text">NEHA BANK</span>
+                </a>
+                <div class="nav-links">
+                    <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="welcome-section">
+            <h1>Welcome, <span class="username">{{ username }}</span>!</h1>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="balance-card">
+            <p>Your Current Balance</p>
+            <div class="balance-amount">${{ "%.2f"|format(balance) }}</div>
+        </div>
+        
+        <div class="transaction-section">
+            <div class="transaction-card">
+                <h2>Deposit Money</h2>
+                <form method="POST" action="{{ url_for('deposit') }}">
+                    <div class="form-group">
+                        <label for="deposit-amount">Amount</label>
+                        <input type="number" id="deposit-amount" name="amount" step="0.01" min="0.01" required>
+                    </div>
+                    <button type="submit">Deposit</button>
+                </form>
+            </div>
+            
+            <div class="transaction-card">
+                <h2>Withdraw Money</h2>
+                <form method="POST" action="{{ url_for('withdraw') }}">
+                    <div class="form-group">
+                        <label for="withdraw-amount">Amount</label>
+                        <input type="number" id="withdraw-amount" name="amount" step="0.01" min="0.01" required>
+                    </div>
+                    <button type="submit" class="withdraw-btn">Withdraw</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="voice-section">
+            <h2>Voice Banking Assistant</h2>
+            <button onclick="startVoiceAssistant()" class="voice-btn">Start Voice Assistant</button>
+            <p id="voice-status">Ready to assist you</p>
+        </div>
+    </main>
+
+    <script>
+        function startVoiceAssistant() {
+            const statusElement = document.getElementById('voice-status');
+            statusElement.textContent = "Listening... Please speak your command";
+            
+            // Simulate voice processing (in a real app, this would be actual voice recognition)
+            setTimeout(() => {
+                statusElement.textContent = "Try saying: 'Deposit 100 dollars' or 'Withdraw 50 dollars'";
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
